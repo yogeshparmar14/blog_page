@@ -12,7 +12,19 @@ const port = process.env.PORT;
 const DATABASE_URL_ATLAS =process.env.DATABASE_URL_ATLAS
 
 //cors policy
-app.use(cors());
+const corsOpts = {
+    origin: '*',
+  
+    methods: [
+      'GET',
+      'POST',
+    ],
+  
+    allowedHeaders: [
+      'Content-Type',
+    ],
+  };
+app.use(cors(corsOpts));
 
 //json
 app.use(express.json());

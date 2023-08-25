@@ -5,7 +5,6 @@ const cors= require("cors");
 const connectDb=require("./src/db/connectiondb.js");
 const userRoutes =require("./src/routes/userRoutes.js");
 const adminRoutes =require("./src/routes/adminRoutes.js");
-const imageRoutes =require("./src/modules/common/uploadFile.js")
 
 
 const app = express();
@@ -25,7 +24,6 @@ connectDb(DATABASE_URL_LOCAL, DATABASE_URL_ATLAS);
 //for Loading Routes
 app.use("/user",userRoutes)
 app.use("/admin",adminRoutes)
-app.use("/common",imageRoutes)
 
 app.listen(port,()=>{
     console.log(`Server listening at http://localhost:${port}`)

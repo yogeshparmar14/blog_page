@@ -9,7 +9,6 @@ const adminRoutes =require("./src/routes/adminRoutes.js");
 
 const app = express();
 const port = process.env.PORT;
-const DATABASE_URL_LOCAL =process.env.DATABASE_URL_LOCAL
 const DATABASE_URL_ATLAS =process.env.DATABASE_URL_ATLAS
 
 //cors policy
@@ -19,7 +18,7 @@ app.use(cors());
 app.use(express.json());
 //Database connection
 // connectDb(DATABASE_URL_ATLAS);
-connectDb(DATABASE_URL_LOCAL, DATABASE_URL_ATLAS);
+connectDb(DATABASE_URL_ATLAS);
 
 //for Loading Routes
 app.use("/user",userRoutes)

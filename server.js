@@ -24,6 +24,9 @@ connectDb(DATABASE_URL_LOCAL, DATABASE_URL_ATLAS);
 //for Loading Routes
 app.use("/user",userRoutes)
 app.use("/admin",adminRoutes)
+app.get('/',(req,res)=>{
+res.send("hello yogesh")
+})
 
 app.listen(port,()=>{
     console.log(`Server listening at http://localhost:${port}`)

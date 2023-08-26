@@ -11,20 +11,11 @@ const app = express();
 const port = process.env.PORT;
 const DATABASE_URL_ATLAS =process.env.DATABASE_URL_ATLAS
 
-//cors policy
-const corsOpts = {
-    origin: '*',
-  
-    methods: [
-      'GET',
-      'POST',
-    ],
-  
-    allowedHeaders: [
-      'Content-Type',
-    ],
+let corsOptions = {
+    origin: ['http://localhost:3000']
   };
-app.use(cors(corsOpts));
+  
+  app.use(cors(corsOptions))
 
 //json
 app.use(express.json());

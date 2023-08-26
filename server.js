@@ -20,6 +20,7 @@ let corsOptions = {
 
 //json
 app.use(express.json());
+ 
 //Database connection
 // connectDb(DATABASE_URL_ATLAS);
 connectDb(DATABASE_URL_ATLAS);

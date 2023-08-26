@@ -67,6 +67,7 @@ const registration = async (req,res)=>{
 const login = async(req,res)=>{
   console.log(" req.body", req.body)
         const {email,password} = req.body
+        console.log("req.body",req.body)
             if(!email||!password)
                return res.status(403).send({
                 data: {},
@@ -106,7 +107,9 @@ const login = async(req,res)=>{
                         "_id":user._id,
                         "name":user.name,
                         "email":user.email,
-                        "accessToken":token}})
+                        "accessToken":token,
+                        "data":user
+                    }})
                 } catch (error) {
                     console.log(error)
                 }

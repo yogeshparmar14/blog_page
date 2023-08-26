@@ -12,7 +12,8 @@ const port = process.env.PORT;
 const DATABASE_URL_ATLAS =process.env.DATABASE_URL_ATLAS
 
 let corsOptions = {
-    origin: ['http://localhost:3000']
+    origin: '*',
+    methods: ['GET','POST','DELETE','UPDATE','PUT','PATCH']
   };
   
   app.use(cors(corsOptions))

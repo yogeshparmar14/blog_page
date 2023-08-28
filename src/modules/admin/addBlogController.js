@@ -1,4 +1,5 @@
 const userModel=require("../../db/models/blogSchema.js")
+const commentModel=require('../../db/models/commentSchema.js')
 const addBlog = async (req,res)=>{
     const {title,imageUrl,description} = req.body
     console.log("req.body",req.body)
@@ -26,7 +27,17 @@ const addBlog = async (req,res)=>{
 
 const getAllBlog = async (req,res)=>{
     try{
-        const data = await userModel.find();
+        const data = await userModel.aggregate([
+            {$match:{}},
+            {
+                "$lookup": {
+                  "from": "comments",
+                  "localField": "_id",
+                  "foreignField": "blog_id",
+                  "as": "comments",
+                },
+              },
+        ]);
         res.json(data)
     }
     catch(error){
@@ -105,5 +116,30 @@ const deleteBlog = async (req,res)=>{
     }
 }
 
+const addComment = async (req,res)=>{
+  
+    const {blogId,commentDescription} = req.body
+    console.log("req.body",req.body)
+    if(!blogId || !commentDescription)
+    return res.status(400).send({"message":"All fields are required","status":400}) 
+    try {
+        
+        const doc = new commentModel({
+            blog_id:blogId,
+            commentDescription:commentDescription,
+        })
+        await doc.save()
+        res.status(200).send({"message":`comment is added successfully!`, "status":200,
+        "data":{
+            "blogId":`${blogId}`,
+            "commentDescription":`${commentDescription}`,
+        }
+        })
+    } catch (error) {
+        console.log(error)
+                     res.status(403).send({"message":"Unable to add comment","status":403})
+    }
+}
 
-module.exports = {addBlog,getAllBlog,editBlog,deleteBlog,updateLike}
+
+module.exports = {addBlog,getAllBlog,editBlog,deleteBlog,updateLike,addComment}
